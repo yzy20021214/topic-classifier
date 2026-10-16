@@ -1,8 +1,9 @@
-﻿"""Download the 20 newsgroups subset and write v1 / v2 raw text files.
+﻿"""Download the 20 newsgroups subset and write v1 / v2 as JSON files.
 
 v1: original text (headers/footers/quotes kept)
 v2: cleaned text (headers/footers/quotes removed)
 """
+import json
 from pathlib import Path
 
 from sklearn.datasets import fetch_20newsgroups
@@ -23,15 +24,15 @@ def dump(version: str, remove: tuple[str, ...]) -> None:
     out = DATA / version
     out.mkdir(parents=True, exist_ok=True)
 
-    with (out / "texts.txt").open("w", encoding="utf-8") as f:
-        for text in data.data:
-            f.write(text.replace("\n", " ").strip() + "\n")
+    records = [
+        {"text": str(text).replace("\n", " ").strip(), "label": int(target)}
+        for text, target in zip(data.data, data.target)
+    ]
 
-    with (out / "labels.txt").open("w", encoding="utf-8") as f:
-        for target in data.target:
-            f.write(str(int(target)) + "\n")
+    with (out / "data.json").open("w", encoding="utf-8") as f:
+        json.dump(records, f, ensure_ascii=False, indent=2)
 
-    print(f"wrote {len(data.data)} samples to {out}")
+    print(f"wrote {len(records)} samples to {out / 'data.json'}")
 
 
 if __name__ == "__main__":

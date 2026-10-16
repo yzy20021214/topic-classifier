@@ -1,4 +1,5 @@
-﻿from dataclasses import dataclass
+﻿import json
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
 
@@ -22,15 +23,15 @@ class Dataset:
 
 def load_dataset(version: DataVersion) -> Dataset:
     base = DATA / version
-    texts_path = base / "texts.txt"
-    labels_path = base / "labels.txt"
+    json_path = base / "data.json"
 
-    if not texts_path.exists() or not labels_path.exists():
+    if not json_path.exists():
         raise FileNotFoundError(
-            f"Dataset {version} not found at {base}. Run `python -m ml.prepare_data` first."
+            f"Dataset {version} not found at {json_path}. Run `python -m ml.prepare_data` first."
         )
 
-    texts = [line.strip() for line in texts_path.read_text(encoding="utf-8").splitlines()]
-    labels = [int(line.strip()) for line in labels_path.read_text(encoding="utf-8").splitlines()]
+    records = json.loads(json_path.read_text(encoding="utf-8"))
+    texts = [str(r["text"]) for r in records]
+    labels = [int(r["label"]) for r in records]
 
     return Dataset(texts=texts, labels=labels)

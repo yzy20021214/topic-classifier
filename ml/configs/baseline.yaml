@@ -1,0 +1,7 @@
+﻿name: baseline
+tfidf:
+  max_features: 5000
+  ngram_range: [1, 1]
+clf:
+  C: 1.0
+  max_iter: 1000

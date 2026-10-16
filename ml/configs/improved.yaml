@@ -1,0 +1,9 @@
+﻿name: improved
+tfidf:
+  max_features: 20000
+  ngram_range: [1, 2]
+  min_df: 2
+  sublinear_tf: true
+clf:
+  C: 5.0
+  max_iter: 2000

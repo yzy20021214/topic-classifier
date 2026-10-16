@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/MI/topic-classifier/mlruns/127008170187652854/0d09b24cc50b40f89205a41f17c77da8/artifacts
+end_time: 1792127781515
+entry_point_name: ''
+experiment_id: '127008170187652854'
+lifecycle_stage: active
+run_id: 0d09b24cc50b40f89205a41f17c77da8
+run_name: improved
+run_uuid: 0d09b24cc50b40f89205a41f17c77da8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1792127775221
+status: 3
+tags: []
+user_id: MI

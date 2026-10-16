@@ -28,9 +28,12 @@ def git_sha() -> str:
 
 
 def build_pipeline(cfg: dict) -> Pipeline:
+    tfidf_cfg = cfg["tfidf"].copy()
+    if "ngram_range" in tfidf_cfg:
+        tfidf_cfg["ngram_range"] = tuple(tfidf_cfg["ngram_range"])
     return Pipeline(
         [
-            ("tfidf", TfidfVectorizer(**cfg["tfidf"])),
+            ("tfidf", TfidfVectorizer(**tfidf_cfg)),
             ("clf", LogisticRegression(**cfg["clf"])),
         ]
     )
@@ -44,7 +47,7 @@ def main() -> None:
     args = parser.parse_args()
 
     cfg = yaml.safe_load((CONFIGS / args.config).read_text(encoding="utf-8"))
-    ds = load_dataset(args.data_version)
+    ds = load_dataset(args.data_version)  # type: ignore[arg-type]
 
     x_train, x_test, y_train, y_test = train_test_split(
         ds.texts, ds.labels, test_size=0.2, random_state=42, stratify=ds.labels

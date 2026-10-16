@@ -22,7 +22,11 @@ CONFIGS = ROOT / "ml" / "configs"
 
 def git_sha() -> str:
     try:
-        return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT).decode().strip()
+        return (
+            subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT)
+            .decode()
+            .strip()
+        )
     except Exception:
         return "unknown"
 

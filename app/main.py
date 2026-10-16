@@ -38,4 +38,6 @@ def predict(req: PredictRequest, model=Depends(get_model)) -> PredictResponse:
         raise HTTPException(status_code=422, detail="text must not be blank")
     proba = model.predict_proba([req.text])[0]
     idx = int(proba.argmax())
-    return PredictResponse(label=LABELS.get(idx, str(idx)), confidence=float(proba[idx]))
+    return PredictResponse(
+        label=LABELS.get(idx, str(idx)), confidence=float(proba[idx])
+    )

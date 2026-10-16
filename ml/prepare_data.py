@@ -3,6 +3,7 @@
 v1: original text (headers/footers/quotes kept)
 v2: cleaned text (headers/footers/quotes removed)
 """
+
 import json
 from pathlib import Path
 

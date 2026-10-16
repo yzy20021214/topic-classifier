@@ -13,7 +13,7 @@ from sklearn.metrics import accuracy_score, f1_score
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 
-from ml.data_pipeline import DataVersion, load_dataset
+from ml.data_pipeline import load_dataset
 
 ROOT = Path(__file__).resolve().parent.parent
 REGISTRY = ROOT / "ml" / "registry"

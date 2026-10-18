@@ -1,4 +1,4 @@
-__pycache__/
+﻿__pycache__/
 *.pyc
 .venv/
 .env
@@ -8,5 +8,6 @@ mlartifacts/
 ml/registry/model.joblib
 .pytest_cache/
 .ruff_cache/
-data/raw/
+data/raw/*
+!data/raw/*.dvc
 !data/raw/.gitkeep
